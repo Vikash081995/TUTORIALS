@@ -8,6 +8,7 @@ export interface FormValues {
 }
 
 const today = new Date();
+
 export const contactData: Array<FormValues> = [
   {
     id: 1,
@@ -30,7 +31,7 @@ export const contactData: Array<FormValues> = [
     preference: "Work from Home"
   },
   {
-    id: 1,
+    id: 3,
     name: "Shawn1 Spencer",
     role: "Dev",
     skills: ["js"],

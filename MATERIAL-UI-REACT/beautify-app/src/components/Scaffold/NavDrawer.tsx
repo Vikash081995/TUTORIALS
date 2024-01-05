@@ -18,7 +18,7 @@ const drawerWidth = 240;
 const themedStyles = (theme: Theme) => {
   return {
     appBar: {
-      zIndex: theme.zIndex.drawer
+      zIndex: theme.zIndex.drawer + 1
     }
   };
 };
@@ -72,6 +72,7 @@ function NavDrawer() {
             </Typography>
           </Toolbar>
           <Drawer
+            disableEnforceFocus
             variant="temporary"
             open={true}
             sx={simpleStyles.drawer}
