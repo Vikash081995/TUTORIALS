@@ -1,35 +1,25 @@
 import {
   Alert,
   AlertTitle,
-  Autocomplete,
   Button,
   Dialog,
   FormControl,
-  FormControlLabel,
   FormGroup,
-  FormLabel,
-  ListItemText,
-  MenuItem,
   Paper,
-  Radio,
-  RadioGroup,
-  Select,
   SelectChangeEvent,
-  Stack,
-  TextField
+  Stack
 } from "@mui/material";
-import { DesktopDatePicker } from "@mui/x-date-pickers";
-import { LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { TextFieldProps } from "@mui/material";
 import { contactData, FormValues } from "../../Data/ContactData";
 import React, { useState } from "react";
+import { BeautifulTextField } from "./FormSubcomponents/BeautifulTextField";
+import BeautifulAutoComplete from "./FormSubcomponents/BeautifulAutoComplete";
+import { BeautifulSelect } from "./FormSubcomponents/BeautifulSelect";
+import BeautifulDesktopDatePicker from "./FormSubcomponents/BeautifulDesktopDatePicker";
+import BeautifulRadios from "./FormSubcomponents/BeautifulRadios";
 
-const roles = ["React", "Angular", "Python", "Nodejs", "Machine learning"];
-const skills = ["Software Dev", "Architect", "Desginer", "Business analyst"];
 const today = new Date();
-const defaultPreference = "Work from Home";
-const minWidth = 300;
+export const defaultPreference = "Work from Home";
+export const minWidth = 300;
 
 function ContactForm() {
   const getDefaultFormValues = () => {
@@ -134,92 +124,33 @@ function ContactForm() {
         <form>
           <FormControl>
             <FormGroup row sx={{ padding: 2, justifyContent: "space-between" }}>
-              <TextField
-                id="name"
-                name="name"
-                label="Name"
-                variant="outlined"
+              <BeautifulTextField
                 value={formValues.name}
-                sx={{ minWidth: minWidth, marginRight: 2 }}
                 onChange={handleTextFieldChange}
               />
-              <Autocomplete
-                options={roles}
-                renderInput={(params) => {
-                  return <TextField name="role" {...params} />;
-                }}
-                sx={{ minWidth: minWidth }}
-                getOptionLabel={(roleOption) => `${roleOption}`}
-                renderOption={(props, option) => {
-                  return <li {...props}>{`${option}`}</li>;
-                }}
+              <BeautifulAutoComplete
                 value={formValues.role || ""}
-                isOptionEqualToValue={(option, value) =>
-                  option === value || value === ""
-                }
                 onInputChange={handleAutoCompleteChange}
               />
             </FormGroup>
             <FormGroup row sx={{ padding: 2, justifyContent: "space-between" }}>
-              <Select
-                id="skill-select"
-                renderValue={(select: string[]) => select.join(",")}
-                value={formValues.skills}
-              >
-                {skills.map((skillName) => {
-                  return (
-                    <MenuItem value={skillName} key={skillName}>
-                      <ListItemText primary={skillName} />
-                    </MenuItem>
-                  );
-                })}
-              </Select>
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DesktopDatePicker
-                  label="Date"
-                  format="MM/DD/YYYY"
-                  // renderInput={(params: TextFieldProps) => {
-                  //   return (
-                  //     <TextField
-                  //       {...params}
-                  //       sx={{ minWidth: minWidth, marginRight: 2 }}
-                  //     />
-                  //   );
-                  // }}
-                  value={formValues.startDate}
-                  onChange={handleDatePickerChange}
-                />
-              </LocalizationProvider>
+              <BeautifulSelect
+                value={formValues.skills || ""}
+                onChange={handleSelectChange}
+              />
+              <BeautifulDesktopDatePicker
+                value={formValues.startDate}
+                onChange={handleDatePickerChange}
+              />
             </FormGroup>
-            <FormGroup row sx={{ padding: 2, justifyContent: "space-between" }}>
-              <FormLabel component="legend">Work Preferences</FormLabel>
-              <RadioGroup
-                id="preference-type-radio"
-                name="preference"
-                value={formValues.preference}
-                onChange={handleRadioChange}
-              >
-                <FormControlLabel
-                  control={<Radio />}
-                  label={defaultPreference}
-                  value={defaultPreference}
-                />
-                <FormControlLabel
-                  control={<Radio />}
-                  label="Hybrid"
-                  value="Hybrid"
-                />
-                <FormControlLabel
-                  control={<Radio />}
-                  label="In Office"
-                  value="In Office"
-                />
-              </RadioGroup>
-              <Stack>
-                <Button onClick={handleSubmit}>Submit</Button>
-                <Button>Clear</Button>
-              </Stack>
-            </FormGroup>
+            <BeautifulRadios
+              preference={formValues.preference}
+              handleRadioChange={handleRadioChange}
+            />
+            <Stack>
+              <Button onClick={handleSubmit}>Submit</Button>
+              <Button>Clear</Button>
+            </Stack>
           </FormControl>
         </form>
       </Paper>
