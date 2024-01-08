@@ -48,6 +48,8 @@ function ContactForm() {
     getDefaultFormValues()
   );
 
+  const [alertOpen, setAlertOpen] = useState(false);
+
   const handleTextFieldChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -110,6 +112,20 @@ function ContactForm() {
       ...formValues,
       [name]: value
     });
+  };
+
+  const handleSubmit = () => {
+    contactData.push(formValues);
+    setAlertOpen(true);
+    clearValues();
+  };
+
+  const clearValues = () => {
+    setFormValues({ ...getDefaultFormValues() });
+  };
+
+  const handleAlertClick = () => {
+    setAlertOpen(false);
   };
 
   return (
@@ -200,16 +216,17 @@ function ContactForm() {
                 />
               </RadioGroup>
               <Stack>
-                <Button>Submit</Button>
+                <Button onClick={handleSubmit}>Submit</Button>
                 <Button>Clear</Button>
               </Stack>
             </FormGroup>
           </FormControl>
         </form>
       </Paper>
-      <Dialog open={false}>
-        <Alert>
+      <Dialog open={alertOpen} onClose={handleAlertClick}>
+        <Alert onClose={handleAlertClick}>
           <AlertTitle>Success!!</AlertTitle>
+          Form Submitted
         </Alert>
       </Dialog>
     </>
