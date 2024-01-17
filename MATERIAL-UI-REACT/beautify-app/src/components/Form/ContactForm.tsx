@@ -2,9 +2,12 @@ import {
   Alert,
   AlertTitle,
   Button,
+  Checkbox,
   Dialog,
   FormControl,
   FormGroup,
+  ListItemText,
+  MenuItem,
   Paper,
   SelectChangeEvent,
   Stack
@@ -16,10 +19,25 @@ import BeautifulAutoComplete from "./FormSubcomponents/BeautifulAutoComplete";
 import { BeautifulSelect } from "./FormSubcomponents/BeautifulSelect";
 import BeautifulDesktopDatePicker from "./FormSubcomponents/BeautifulDesktopDatePicker";
 import BeautifulRadios from "./FormSubcomponents/BeautifulRadios";
+const skills = ["Software Dev", "Architect", "Desginer", "Business analyst"];
 
 const today = new Date();
 export const defaultPreference = "Work from Home";
 export const minWidth = 300;
+
+const paperInputStyle = {
+  "& .MuiOutlinedInput-root": {
+    "& > fieldset": { border: "1px solid ", borderColor: "primary.main" },
+    "&:hover": {
+      "& > fieldset": {
+        borderColor: "primary.light"
+      }
+    }
+  },
+  "& .MuiFormLabel-root": {
+    color: "pprimary.dark"
+  }
+};
 
 function ContactForm() {
   const getDefaultFormValues = () => {
@@ -120,7 +138,7 @@ function ContactForm() {
 
   return (
     <>
-      <Paper>
+      <Paper sx={paperInputStyle}>
         <form>
           <FormControl>
             <FormGroup row sx={{ padding: 2, justifyContent: "space-between" }}>
@@ -137,7 +155,16 @@ function ContactForm() {
               <BeautifulSelect
                 value={formValues.skills || ""}
                 onChange={handleSelectChange}
-              />
+              >
+                {skills.map((skillName) => {
+                  return (
+                    <MenuItem value={skillName} key={skillName}>
+                      <Checkbox checked={formValues.skills?.includes(skillName)} />
+                      <ListItemText primary={skillName} />
+                    </MenuItem>
+                  );
+                })}
+              </BeautifulSelect>
               <BeautifulDesktopDatePicker
                 value={formValues.startDate}
                 onChange={handleDatePickerChange}

@@ -1,18 +1,11 @@
-import {
-  ListItemText,
-  MenuItem,
-  Select,
-  SelectChangeEvent
-} from "@mui/material";
+import { Select, SelectChangeEvent } from "@mui/material";
 import { minWidth } from "../ContactForm";
-const skills = ["Software Dev", "Architect", "Desginer", "Business analyst"];
+import { ReactNode } from "react";
 
 export const BeautifulSelect = (props: {
   value: "" | string[] | undefined;
-  onChange: (
-    event: SelectChangeEvent<string[]>,
-    child: React.ReactNode
-  ) => void;
+  onChange: (event: SelectChangeEvent<string[]>, child: ReactNode) => void;
+  children: ReactNode[];
 }) => {
   return (
     <Select
@@ -20,14 +13,9 @@ export const BeautifulSelect = (props: {
       id="skill-select"
       renderValue={(select: string[]) => select.join(",")}
       sx={{ minWidth: minWidth, marginRight: 2 }}
+      multiple
     >
-      {skills.map((skillName) => {
-        return (
-          <MenuItem value={skillName} key={skillName}>
-            <ListItemText primary={skillName} />
-          </MenuItem>
-        );
-      })}
+      {props.children}
     </Select>
   );
 };

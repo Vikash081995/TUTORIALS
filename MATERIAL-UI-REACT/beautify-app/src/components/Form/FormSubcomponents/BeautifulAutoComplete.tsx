@@ -15,12 +15,35 @@ const BeautifulAutoComplete = (props: {
       {...props}
       options={roles}
       renderInput={(params: any) => {
-        return <TextField name="role" {...params} />;
+        return (
+          <TextField
+            name="role"
+            {...params}
+            sx={{
+              "& .MuiOutlinedInput-root.Mui-focused": {
+                color: "primary.dark"
+              }
+            }}
+          />
+        );
       }}
       sx={{ minWidth: minWidth }}
       getOptionLabel={(roleOption: any) => `${roleOption}`}
       renderOption={(props: any, option: any) => {
         return <li {...props}>{`${option}`}</li>;
+      }}
+      ListboxProps={{
+        sx: {
+          height: 100,
+          color: "primary.dark",
+          "& li.MuiAutocomplete-option:nth-child(even)": {
+            backgroundColor: "green"
+          },
+          "& li.MuiAutcomplete-option:hover": { backgroundColor: "gold" },
+          "& li.MuiAutoComplete-option[aria-selected='true'].Mui-focused": {
+            backgroundColor: "gold"
+          }
+        }
       }}
       isOptionEqualToValue={(option: any, value: any) =>
         option === value || value === ""
