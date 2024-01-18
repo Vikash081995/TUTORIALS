@@ -25,6 +25,11 @@ const BeautifulDesktopDatePicker = (props: {
         //     />
         //   );
         // }}
+        //  components={{
+        //   OpenPickerIcon:CalendarTodayIcon
+        //  }}
+
+        // PopperProps={{}}
       />
     </LocalizationProvider>
   );
