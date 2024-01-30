@@ -1,0 +1,18 @@
+body {
+  background-color: black;
+}
+
+.container {
+  width: 90vw;
+  margin: 0 auto;
+  max-width: 1170px;
+  border: 1px solid yellow;
+}
+
+.container p {
+  color: antiquewhite;
+}
+
+.container h1 {
+  color: aliceblue;
+}
