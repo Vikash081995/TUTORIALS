@@ -62,7 +62,6 @@ const ListItems = [
 
 function NavDrawer() {
   const theme = useTheme();
-
   return (
     <BrowserRouter>
       <div>
