@@ -6,64 +6,119 @@ import {
   Grid,
   Typography,
   List,
-  ListSubheader
+  ListSubheader,
+  Box,
+  Button,
+  Collapse
 } from "@mui/material";
 import { contactData } from "../../Data/ContactData";
+import { useState } from "react";
+
+const contactLIHeight = 24;
+let maxSkills = 1;
 
 const ContactCardGrid = () => {
+  const [open, setOpen] = useState(true);
+
+  const gridAlignProps = {
+    display: "flex",
+    justifyContent: "flex-end",
+    alignItems: "flex-end"
+  };
+
   return (
-    <Grid container spacing={2} sx={{ width: 700 }}>
-      {contactData.map((contact) => {
-        return (
-          <Grid item key={contact.name}>
-            <Card sx={{ width: 300 }}>
-              <CardHeader
-                title={contact.name}
-                subheader={contact.role}
-                avatar={
-                  <Avatar>
-                    {contact.name?.substring(0, 1).toUpperCase() || "A"}
-                  </Avatar>
-                }
-              />
-              <CardContent>
-                <Typography>
-                  <b>Start Date: </b>
-                  {contact.startDate}
-                </Typography>
-                <Typography>
-                  <b>Work Preference :{contact.preference}</b>
-                </Typography>
-                <List
+    <Box
+      m={1}
+      p={1}
+      display="flex"
+      justifyContent="center"
+      flexDirection="row"
+      alignItems="flex-end"
+    >
+      <Button sx={{ marginBottom: 3 }} onClick={() => setOpen(!open)}>
+        Collapse
+      </Button>
+      <Grid
+        container
+        spacing={2}
+        sx={{
+          width: 700,
+          backgroundColor: "grid.main",
+          marginLeft: 0,
+          paddingRight: 2
+        }}
+      >
+        {contactData.map((contact) => {
+          maxSkills =
+            (contact?.skills?.length || 0) > maxSkills
+              ? contact?.skills?.length || 0
+              : maxSkills;
+          return (
+            <Grid
+              item
+              key={contact.name}
+              xs={open ? 6 : 12}
+              sx={{ ...gridAlignProps, minHeight: 300 }}
+            >
+              <Card sx={{ width: 300, boxShadow: 6 }}>
+                <CardHeader
+                  title={contact.name}
+                  subheader={contact.role}
                   sx={{
-                    listStyle: "list-item",
-                    listStyleType: "circle",
-                    paddingLeft: 2
+                    borderBottom: "1px solid",
+                    borderBottomColor: "primary.main"
                   }}
-                  subheader={
-                    <ListSubheader
-                      sx={{
-                        right: 16,
-                        position: "inherit",
-                        fontSize: "1.25rem",
-                        color: "black",
-                        paddingLeft: 0
-                      }}
-                    >
-                      Skills:
-                    </ListSubheader>
+                  avatar={
+                    <Avatar sx={{ backgroundColor: "primary.main" }}>
+                      {contact.name?.substring(0, 1).toUpperCase() || "A"}
+                    </Avatar>
                   }
-                >
-                  {contact.skills?.map((skill) => {
-                    return <li style={{ paddingBottom: "2px" }}>{skill}</li>;
-                  })}
-                </List>
-              </CardContent>
-            </Card>
-          </Grid>
-        );
-      })}
-    </Grid>
+                />
+                <Collapse in={open} timeout={2000} orientation="horizontal">
+                  <CardContent
+                    sx={{ height: 104 + maxSkills * contactLIHeight }}
+                  >
+                    <Typography>
+                      <b>Start Date: </b>
+                      {contact.startDate}
+                    </Typography>
+                    <Typography>
+                      <b>Work Preference :{contact.preference}</b>
+                    </Typography>
+                    <List
+                      sx={{
+                        listStyle: "list-item",
+                        listStyleType: "circle",
+                        paddingLeft: 2
+                      }}
+                      subheader={
+                        <ListSubheader
+                          sx={{
+                            right: 16,
+                            position: "inherit",
+                            fontSize: "1.25rem",
+                            color: "black",
+                            paddingLeft: 0
+                          }}
+                        >
+                          Skills:
+                        </ListSubheader>
+                      }
+                    >
+                      {contact.skills?.map((skill) => {
+                        return (
+                          <li style={{ paddingBottom: "2px" }}>{skill}</li>
+                        );
+                      })}
+                    </List>
+                  </CardContent>
+                </Collapse>
+              </Card>
+            </Grid>
+          );
+        })}
+      </Grid>
+    </Box>
   );
 };
 

@@ -19,6 +19,9 @@ import BeautifulAutoComplete from "./FormSubcomponents/BeautifulAutoComplete";
 import { BeautifulSelect } from "./FormSubcomponents/BeautifulSelect";
 import BeautifulDesktopDatePicker from "./FormSubcomponents/BeautifulDesktopDatePicker";
 import BeautifulRadios from "./FormSubcomponents/BeautifulRadios";
+import { StyledFormGroup } from "./FormSubcomponents/StyledFormGroup";
+import { useTheme } from "@mui/material/styles";
+
 const skills = ["Software Dev", "Architect", "Desginer", "Business analyst"];
 
 const today = new Date();
@@ -40,6 +43,7 @@ const paperInputStyle = {
 };
 
 function ContactForm() {
+  const theme = useTheme();
   const getDefaultFormValues = () => {
     return {
       id: contactData.length + 1,
@@ -138,10 +142,18 @@ function ContactForm() {
 
   return (
     <>
-      <Paper sx={paperInputStyle}>
+      <Paper
+        sx={{
+          ...paperInputStyle,
+          margin: { xs: 1, sm: 2 },
+          zIndex: theme.zIndex.appBar + 1,
+          "&:hover": { backgroundColor: "rgba(0,0,0,0,1)" },
+          backgroundColor: "grid.dark"
+        }}
+      >
         <form>
           <FormControl>
-            <FormGroup row sx={{ padding: 2, justifyContent: "space-between" }}>
+            <StyledFormGroup>
               <BeautifulTextField
                 value={formValues.name}
                 onChange={handleTextFieldChange}
@@ -150,8 +162,8 @@ function ContactForm() {
                 value={formValues.role || ""}
                 onInputChange={handleAutoCompleteChange}
               />
-            </FormGroup>
-            <FormGroup row sx={{ padding: 2, justifyContent: "space-between" }}>
+            </StyledFormGroup>
+            <StyledFormGroup>
               <BeautifulSelect
                 value={formValues.skills || ""}
                 onChange={handleSelectChange}
@@ -159,7 +171,9 @@ function ContactForm() {
                 {skills.map((skillName) => {
                   return (
                     <MenuItem value={skillName} key={skillName}>
-                      <Checkbox checked={formValues.skills?.includes(skillName)} />
+                      <Checkbox
+                        checked={formValues.skills?.includes(skillName)}
+                      />
                       <ListItemText primary={skillName} />
                     </MenuItem>
                   );
@@ -169,14 +183,27 @@ function ContactForm() {
                 value={formValues.startDate}
                 onChange={handleDatePickerChange}
               />
-            </FormGroup>
+            </StyledFormGroup>
             <BeautifulRadios
               preference={formValues.preference}
               handleRadioChange={handleRadioChange}
             />
-            <Stack>
-              <Button onClick={handleSubmit}>Submit</Button>
-              <Button>Clear</Button>
+            <Stack
+              direction="row"
+              justifyContent="flex-end"
+              alignItems="flex-end"
+              sx={{ minWidth: minWidth }}
+            >
+              <Button
+                variant="contained"
+                sx={{ height: 56, width: 100 }}
+                onClick={handleSubmit}
+              >
+                Submit
+              </Button>
+              <Button variant="beautiful" sx={{ height: 56, width: 100 }}>
+                Clear
+              </Button>
             </Stack>
           </FormControl>
         </form>
