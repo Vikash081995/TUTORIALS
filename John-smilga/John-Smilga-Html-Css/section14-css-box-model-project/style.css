@@ -1,0 +1,38 @@
+body {
+  background-color: rgb(33, 20, 20);
+}
+
+.card {
+  background-color: aliceblue;
+  padding: 1.5rem 2rem;
+  text-align: center;
+  max-width: 300px;
+  margin: 3rem;
+  border-radius: 0.5rem;
+  border: 5px solid white;
+}
+
+.card-1 {
+  border-color: rgb(0, 255, 68);
+}
+
+.icon {
+  width: 40px;
+  background-color: rgb(237, 145, 25);
+  border-radius:50%;
+}
+
+
+.card-1 .icon{
+    background-color: #ff69a6;
+}
+
+
+.btn{
+    text-transform:capitalize;
+    border:transparent;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    letter-spacing:2px;
+    background-color: aqua;
+}
