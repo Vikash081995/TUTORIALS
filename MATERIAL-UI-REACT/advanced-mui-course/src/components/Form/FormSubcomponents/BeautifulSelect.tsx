@@ -24,7 +24,11 @@ export const BeautifulSelect = (props: {
       {...props}
       id="skill-select"
       renderValue={(select: string[]) => select.join(",")}
-      sx={{ minWidth: minWidth, marginRight: 2 }}
+      sx={{
+        minWidth: minWidth,
+        marginRight: 2,
+        marginBottom: { xs: 2, md: 0 }
+      }}
       multiple
       MenuProps={{
         PaperProps: {

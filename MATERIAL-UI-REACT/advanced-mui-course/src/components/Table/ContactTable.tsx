@@ -8,17 +8,37 @@ import {
 } from "@mui/material";
 import { contactData } from "../../Data/ContactData";
 
+const borderColor = {
+  borderBottomColor: "primary.main"
+};
+
 function ContactTable() {
   return (
-    <TableContainer>
+    <TableContainer
+      sx={{
+        borderRadius: 1,
+        boxShadow: 4,
+        margin: 1,
+        width: "calc(100% -16px)"
+      }}
+    >
       <Table>
         <TableHead>
-          <TableRow>
-            <TableCell>Name: </TableCell>
-            <TableCell>Role: </TableCell>
-            <TableCell>Skills: </TableCell>
-            <TableCell>StartDate: </TableCell>
-            <TableCell>Preferences </TableCell>
+          <TableRow
+            sx={{
+              backgroundColor: "grid.main",
+              borderBottomColor: "primary.main"
+            }}
+          >
+            <TableCell sx={{ ...borderColor, width: "30%" }}>Name: </TableCell>
+            <TableCell sx={{ ...borderColor, width: "17%" }}>Role: </TableCell>
+            <TableCell sx={{ ...borderColor, width: "17%" }}>Skills:</TableCell>
+            <TableCell sx={{ ...borderColor, width: "19%" }}>
+              StartDate:
+            </TableCell>
+            <TableCell sx={{ ...borderColor, width: "17%" }}>
+              Preferences
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -33,9 +53,27 @@ function ContactTable() {
                       </TableCell>
                     );
                   }
+                  if (key === "name") {
+                    return (
+                      <TableCell
+                        key={contact.id + key}
+                        sx={{
+                          ...borderColor,
+                          backgroundColor: "primary.light"
+                        }}
+                        onClick={(event: React.MouseEvent<HTMLElement>) => {
+                          console.log((event.target as Element).innerHTML);
+                        }}
+                      >
+                        {value}
+                      </TableCell>
+                    );
+                  }
                   if (key !== "id") {
                     return (
-                      <TableCell key={contact.id + key}>{value}</TableCell>
+                      <TableCell key={contact.id + key} sx={{ ...borderColor }}>
+                        {value}
+                      </TableCell>
                     );
                   }
                   return "";

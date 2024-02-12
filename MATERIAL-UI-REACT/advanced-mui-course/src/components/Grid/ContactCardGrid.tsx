@@ -20,11 +20,13 @@ let maxSkills = 1;
 const ContactCardGrid = () => {
   const [open, setOpen] = useState(true);
 
-  const gridAlignProps = {
-    display: "flex",
-    justifyContent: "flex-end",
-    alignItems: "flex-end"
-  };
+  const gridAlignProps = open
+    ? {}
+    : {
+        display: "flex",
+        justifyContent: "flex-end",
+        alignItems: "flex-end"
+      };
 
   return (
     <Box
@@ -45,7 +47,8 @@ const ContactCardGrid = () => {
           width: 700,
           backgroundColor: "grid.main",
           marginLeft: 0,
-          paddingRight: 2
+          paddingRight: 2,
+          paddingBottom: 2
         }}
       >
         {contactData.map((contact) => {

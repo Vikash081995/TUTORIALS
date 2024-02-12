@@ -1,7 +1,31 @@
-import { DataGrid } from "@mui/x-data-grid";
+import {
+  DataGrid,
+  GridRenderCellParams,
+  GridToolbar,
+  GridToolbarContainer
+} from "@mui/x-data-grid";
 import { contactData } from "../../Data/ContactData";
 import useTheme from "@mui/material/styles/useTheme";
-import { Theme } from "@mui/material";
+import { Box, Button, Theme } from "@mui/material";
+
+const handlePrintClick = (cellValues: GridRenderCellParams) => {
+  console.log(cellValues);
+};
+
+const datagridSx = {
+  "& .MuiDataGrid-ColumnHeaders": {
+    backgroundColor: "primary.main",
+    fontWeight: "bold",
+    fontSize: 20
+  },
+  "& .MuiDataGrid-virtualScrollerRenderZone": {
+    "& .MuiDataGrid-row": {
+      "&:nth-of-type(2n)": {
+        backgroundColor: "grid.main"
+      }
+    }
+  }
+};
 
 const columns = (theme: Theme) => [
   {
@@ -10,9 +34,15 @@ const columns = (theme: Theme) => [
     minWidth: 150,
     renderCell: (cellValues: any) => {
       return (
-        <div style={{ color: theme.palette.primary.main }}>
-          {cellValues.value ? cellValues.value[0] : ""}
-        </div>
+        <Box
+          sx={{
+            color: "primary.main",
+            fontSize: 18,
+            fontWeight: "bold"
+          }}
+        >
+          {cellValues.value}
+        </Box>
       );
     }
   },
@@ -47,6 +77,22 @@ const columns = (theme: Theme) => [
     renderCell: (cellValues: any) => {
       return cellValues.value;
     }
+  },
+  {
+    field: "Print",
+    renderCell: (cellValues: GridRenderCellParams) => {
+      return (
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={(event) => {
+            handlePrintClick(cellValues);
+          }}
+        >
+          Print
+        </Button>
+      );
+    }
   }
 ];
 
@@ -58,16 +104,29 @@ function ContactDataGrid() {
       <DataGrid
         rows={rows()}
         columns={columns(theme)}
+        pageSizeOptions={[5]}
+        sx={datagridSx}
+        components={{
+          Toolbar: () => (
+            <GridToolbarContainer
+              sx={{
+                justifyContent: "flex-end",
+                "& button": { border: "none" },
+                "& .MuiBox-root": { display: "none" }
+              }}
+            ></GridToolbarContainer>
+          )
+        }}
         initialState={{
-          pagination: {
-            paginationModel: {
-              pageSize: 5
-            }
+          sorting: {
+            sortModel: [
+              {
+                field: "name",
+                sort: "asc"
+              }
+            ]
           }
         }}
-        pageSizeOptions={[5]}
-        // headerHeight={60}
-        // rowsHeight={120}
       />
       ;
     </div>

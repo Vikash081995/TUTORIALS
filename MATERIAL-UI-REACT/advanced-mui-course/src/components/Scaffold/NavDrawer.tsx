@@ -1,10 +1,12 @@
 import {
   AppBar,
   Drawer,
+  IconButton,
   List,
   ListItem,
   Toolbar,
-  Typography
+  Typography,
+  useMediaQuery
 } from "@mui/material";
 import { BrowserRouter, Link, Routes, Route } from "react-router-dom";
 import ContactForm from "../Form/ContactForm";
@@ -13,33 +15,39 @@ import ContactTable from "../Table/ContactTable";
 import ContactDataGrid from "../DataGrid/ContactDataGrid";
 import { useTheme, Theme, ThemeProvider } from "@mui/material/styles";
 import { BeautifulTheme } from "../../Theme/BeautifulTheme";
+import { useEffect, useState } from "react";
+import MenuIcon from "@mui/icons-material/Menu";
 
 const drawerWidth = 240;
 
-const themedStyles = (theme: Theme) => {
+const themedStyles = (theme: Theme, responsiveDrawerWidth: number | string) => {
   return {
     appBar: {
       zIndex: theme.zIndex.drawer + 1
+    },
+    drawer: {
+      width: responsiveDrawerWidth,
+      "& .MuiBackdrop-root": {
+        display: "none"
+      }
+    },
+    drawerPaper: {
+      width: responsiveDrawerWidth,
+      backgroundColor: "rgba(120,120,120,0.2)"
+    },
+    content: {
+      marginLeft: responsiveDrawerWidth,
+      padding: 3,
+      maxWidth: 720,
+      minWidth:375
+    },
+    menuButton: {
+      marginRight: 2
+    },
+    contentShift:{
+      marginLeft:responsiveDrawerWidth
     }
   };
-};
-
-const simpleStyles = {
-  drawer: {
-    width: drawerWidth,
-    "& .MuiBackdrop-root": {
-      display: "none"
-    }
-  },
-  drawerPaper: {
-    width: drawerWidth,
-    backgroundColor: "rgba(120,120,120,0.2)"
-  },
-  content: {
-    marginLeft: drawerWidth,
-    padding: 3,
-    maxWidth: 720
-  }
 };
 
 const ListItems = [
@@ -63,12 +71,36 @@ const ListItems = [
 
 function NavDrawer() {
   const theme = useTheme();
+  const greaterThan375 = useMediaQuery("(min-width: 376px)");
+  const [open, setOpen] = useState(greaterThan375);
+  const responsiveDrawerWidth = greaterThan375 ? drawerWidth : "100%";
+
+  useEffect(() => {
+    setOpen(greaterThan375);
+  }, [greaterThan375]);
+
   return (
     <BrowserRouter>
       {/* header section */}
       <div>
-        <AppBar position="fixed" sx={themedStyles(theme).appBar}>
+        <AppBar
+          position="fixed"
+          sx={themedStyles(theme, responsiveDrawerWidth).appBar}
+        >
           <Toolbar>
+            <IconButton
+              color="inherit"
+              edge="start"
+              onClick={() => {
+                setOpen(!open);
+              }}
+              sx={{
+                ...themedStyles(theme, responsiveDrawerWidth).menuButton,
+                display: greaterThan375 ? "none" : ""
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
             <Typography variant="h6" noWrap>
               Advanced material ui styling
             </Typography>
@@ -76,10 +108,10 @@ function NavDrawer() {
           <Drawer
             disableEnforceFocus
             variant="temporary"
-            open={true}
-            sx={simpleStyles.drawer}
+            open={open}
+            sx={themedStyles(theme, responsiveDrawerWidth).drawer}
             PaperProps={{
-              sx: simpleStyles.drawerPaper,
+              sx: themedStyles(theme, responsiveDrawerWidth).drawerPaper,
               elevation: 9
             }}
           >
@@ -94,7 +126,7 @@ function NavDrawer() {
               })}
             </List>
           </Drawer>
-          <main style={simpleStyles.content}>
+          <main style={themedStyles(theme, responsiveDrawerWidth).content}>
             <Toolbar />
             <ThemeProvider theme={BeautifulTheme}>
               <Routes>

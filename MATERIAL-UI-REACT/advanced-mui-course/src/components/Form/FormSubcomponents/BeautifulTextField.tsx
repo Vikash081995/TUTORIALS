@@ -11,7 +11,7 @@ export const BeautifulTextField = (props: TextFieldProps) => {
       variant="outlined"
       sx={{
         minWidth: minWidth,
-        marginRight: 2,
+        marginRight: { xs: 2, md: 0 },
         zIndex: "drawer",
         "& .MuiInputBase-root": {
           height: 80
