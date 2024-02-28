@@ -1,0 +1,44 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: boredr-box;
+}
+
+:root {
+  --primary: #645cff;
+  --primary-dark: #3c3799;
+  --grey-light: #f1f5f9;
+  --letter-spacing: 0.5rem;
+}
+body {
+  background-color: black;
+  line-height: 1.5;
+  background: var(--grey-light);
+  font-family: "Poppins", sans-serif;
+}
+
+img {
+  width: 100%;
+}
+
+.blogs {
+  padding: 5rem 0;
+}
+
+.section-title {
+  text-align: center;
+  text-transform: capitalize;
+  letter-spacing: var(--letter-spacing);
+  margin-bottom: 2rem;
+}
+
+.blogs-center {
+  width: 100%;
+  max-width: 90vw;
+  margin: 0 auto;
+}
+
+.blog{
+    background: black;
+    color:white;
+}

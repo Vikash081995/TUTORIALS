@@ -7,6 +7,7 @@ function SearchBar({ onSubmit }) {
     event.preventDefault();
     onSubmit(term);
   };
+
   const handleChange = (e) => {
     setTerm(e.target.value);
   };
