@@ -6,7 +6,7 @@ function BookShow({ book }) {
   const [showEdit, setShowEdit] = useState(false);
   const { deleteBookById, editBookById } = useBooksContext();
 
-  const handleClick = () => {
+  const handleDeleteClick = () => {
     deleteBookById(book.id);
   };
 
@@ -29,7 +29,7 @@ function BookShow({ book }) {
       <button className="edit" onClick={EditClickHandler}>
         Edit
       </button>
-      <button onClick={handleClick}> delete </button>
+      <button onClick={handleDeleteClick}> delete </button>
     </div>
   );
 }

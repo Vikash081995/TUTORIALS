@@ -23,7 +23,7 @@ function BookCreate() {
         <input className="input" value={title} onChange={handleChange} />
         <button className="button">Create !</button>
       </form>
-    </div>
+    </div>  
   );
 }
 
