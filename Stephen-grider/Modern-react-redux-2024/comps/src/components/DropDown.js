@@ -14,7 +14,6 @@ function DropDown({ options, value, onChange }) {
       if (!divEl.current) {
         return;
       }
-
       if (!divEl.current.contains(event.target)) {
         setIsOpen(false);
       }

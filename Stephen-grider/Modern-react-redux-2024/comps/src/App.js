@@ -1,5 +1,4 @@
 import React from "react";
-
 import Route from "./components/Route";
 import AccordionPage from "./pages/AccordionPage";
 import DropDownPage from "./pages/DropDownPage";

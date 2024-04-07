@@ -11,14 +11,13 @@ function Accordion({ items }) {
         return nextIndex;
       }
     });
-  };
+  }; 
 
   return (
     <div>
       {items.map((item, index) => {
         const isExpanded = index === expandedIndex;
-
-        return (
+        return ( 
           <div key={item.id}>
             <div onClick={() => handleClick(index)}>{item.label}</div>
             {isExpanded && <div>{item.content}</div>}
