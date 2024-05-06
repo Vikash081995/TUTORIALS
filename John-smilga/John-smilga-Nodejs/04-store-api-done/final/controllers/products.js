@@ -32,7 +32,7 @@ const getAllProducts = async (req, res) => {
     let filters = numericFilters.replace(
       regEx,
       (match) => `-${operatorMap[match]}-`
-    );
+    ); 
     const options = ['price', 'rating'];
     filters = filters.split(',').forEach((item) => {
       const [field, operator, value] = item.split('-');
