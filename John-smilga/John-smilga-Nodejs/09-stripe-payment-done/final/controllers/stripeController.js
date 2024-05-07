@@ -16,3 +16,4 @@ const stripeController = async (req, res) => {
 };
 
 module.exports = stripeController;
+  
