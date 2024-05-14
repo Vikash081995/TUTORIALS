@@ -1,7 +1,12 @@
 import React from "react";
 
-function Table({ data, config }) {
+function Table({ data, config, keyFn }) {
   const renderedHeaders = config.map((column) => {
+    if (column.header) {
+      return (
+        <React.Fragment key={column.label}>{column.header()}</React.Fragment>
+      );
+    }
     return <th key={column.label}>{column.label}</th>;
   });
 
@@ -9,7 +14,7 @@ function Table({ data, config }) {
     const renderedCells = config.map((column) => {
       return <td key={column.label}>{column.render(rowData)}</td>;
     });
-    return <tr key={rowData.name}>{renderedCells}</tr>;
+    return <tr key={keyFn(rowData)}>{renderedCells}</tr>;
   });
 
   return (
