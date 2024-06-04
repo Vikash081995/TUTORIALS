@@ -1,6 +1,8 @@
+import MealsGrid from "../components/meals/meals-grid";
 import classes from "./page.module.css";
 
-export default function mealPage() {
+export default async function MealsPage() {
+  const meals = await getMeals();
   return (
     <>
       <header className={classes.header}>
@@ -13,7 +15,9 @@ export default function mealPage() {
       <p className={classes.cta}>
         <Link href="/meals/share">share your fav recipe</Link>
       </p>
-      <main></main>
+      <main className={classes.main}>
+        <MealsGrid meals={meals} />
+      </main>
     </>
   );
 }
