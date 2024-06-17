@@ -15,9 +15,11 @@ function App() {
     setJobs(newJobs);
     setLoading(false);
   };
+
   useEffect(() => {
     fetchJobs();
   }, []);
+  
   if (loading) {
     return (
       <section className="jobs-center">
