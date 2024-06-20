@@ -4,6 +4,7 @@ import { useOrderDetails } from "../../contexts/OrderDetails";
 
 export default function ToppingOption({ name, imagePath }) {
   const { updateItemCount } = useOrderDetails();
+  
   const handleChange = (e) => {
     updateItemCount(name, e.target.checked ? 1 : 0, "toppings");
   };

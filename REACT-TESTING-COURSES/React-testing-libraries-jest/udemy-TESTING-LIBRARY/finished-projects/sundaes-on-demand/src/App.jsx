@@ -12,6 +12,7 @@ export default function App() {
   const [orderPhase, setOrderPhase] = useState("inProgress");
 
   let Component = OrderEntry; // default to order page
+  
   switch (orderPhase) {
     case "inProgress":
       Component = OrderEntry;

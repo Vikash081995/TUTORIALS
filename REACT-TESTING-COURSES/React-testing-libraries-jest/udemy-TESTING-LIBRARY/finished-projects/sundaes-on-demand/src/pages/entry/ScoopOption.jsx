@@ -8,6 +8,7 @@ export default function ScoopOptions({ name, imagePath }) {
   const { updateItemCount } = useOrderDetails();
 
   const [isValid, setIsValid] = useState(true);
+  
   const handleChange = (event) => {
     const currentValue = event.target.value;
 
