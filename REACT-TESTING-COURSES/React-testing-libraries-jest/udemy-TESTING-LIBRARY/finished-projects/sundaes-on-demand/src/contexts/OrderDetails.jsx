@@ -12,7 +12,6 @@ export function useOrderDetails() {
       "useOrderDetails must be called from within an OrderDetailsProvider"
     );
   }
-
   return contextValue;
 }
 

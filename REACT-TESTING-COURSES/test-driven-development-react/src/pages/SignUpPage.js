@@ -23,7 +23,7 @@ const SignUpPage = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    axios.post("/api/1.0/users", user);
+    axios.post("/api/1.0/users",user);
   };
   let disabled = true;
   if (user.password && repeatedPassword) {
