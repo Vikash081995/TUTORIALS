@@ -4,8 +4,16 @@ import SearchInput from "./SearchInput";
 
 const Header = () => {
   return (
-    <div>
-      <Link to="/packages/react">NPM registery</Link>;
+    <div className="flex items-center justify-between px-4 border-b h-14 ">
+      <div className="flex items-center space-x-2 text-sm font-medium">
+        <Link to="/" className="text-lg font-bold">
+          NPM registery
+        </Link>
+        ;
+      </div>
+      <div className="w-full max-w-xl ml-4">
+        <SearchInput />
+      </div>
     </div>
   );
 };

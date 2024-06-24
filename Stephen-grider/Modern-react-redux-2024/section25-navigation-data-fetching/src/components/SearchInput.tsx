@@ -13,7 +13,17 @@ const SearchInput = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input value={term} onChange={(e) => setTerm(e.target.value)} />
+      <div className="relative">
+        <div className="absolute inset-y-0 flex items-center pl-3">
+          <VscSearch className="h-5 w-5 text-gray-500" />
+          <input
+            value={term}
+            onChange={(e) => setTerm(e.target.value)}
+            placeholder="search packages"
+            className="pl-10 py-2 w-full border-0 shadow-none"
+          />
+        </div>
+      </div>
     </form>
   );
 };
