@@ -1,3 +1,4 @@
+
 type ProductProps = {
   id: string;
   image: string;
@@ -10,8 +11,10 @@ export default function Product({
   image,
   title,
   price,
-  description,
+  description
 }: ProductProps) {
+  
+
   function handleAddToCart() {}
 
   return (
