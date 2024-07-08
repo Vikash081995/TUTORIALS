@@ -5,6 +5,7 @@ const Wrapper = styled.section`
     display: grid;
     grid-template-columns: 1fr;
   }
+
   .dashboard-page {
     width: 90vw;
     margin: 0 auto;
@@ -12,10 +13,13 @@ const Wrapper = styled.section`
   }
   @media (min-width: 992px) {
     .dashboard {
-      grid-template-columns: auto 1fr;
+      display: grid;
+      grid-template-columns:auto 1fr;
     }
+
     .dashboard-page {
       width: 90%;
+     
     }
   }
 `;
