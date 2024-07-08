@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Wrapper = styled.section`
   min-height: 100vh;
@@ -20,10 +20,10 @@ const Wrapper = styled.section`
   p {
     margin-top: 1rem;
     text-align: center;
-    line-height: 1.5;
+    line-height: 1.5%;
   }
   .btn {
-    margin-top: 1rem;
+    margin-top: 1;
   }
   .member-btn {
     color: var(--primary-500);
