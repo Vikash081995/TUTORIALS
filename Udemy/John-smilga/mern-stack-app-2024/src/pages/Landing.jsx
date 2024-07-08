@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import Wrapper from "../assets/wrappers/LandingPage";
 import logo from "../assets/logo.svg";
 import main from "../assets/main.svg";
 import { Link } from "react-router-dom";
@@ -27,21 +27,10 @@ const Landing = () => {
             Login/ Demo user
           </Link>
         </div>
-        <img src={main} alt="job hunt" className="img main-img"/>
+        <img src={main} alt="job hunt" className="img main-img" />
       </div>
     </Wrapper>
   );
 };
-
-const Wrapper = styled.div`
-  background: red;
-  h1 {
-    color: white;
-  }
-  .content {
-    background: blue;
-    color: yellow;
-  }
-`;
 
 export default Landing;
