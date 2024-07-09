@@ -13,6 +13,14 @@ import {
   AllJobs
 } from "./pages";
 
+export const checkDefaulttheme = () => {
+  const isDarkTheme = localStorage.getItem("darkTheme") === "true";
+  document.body.classList.toggle("dark-theme", isDarkTheme);
+  return isDarkTheme;
+};
+
+checkDefaulttheme();
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -50,6 +58,10 @@ const router = createBrowserRouter([
           {
             path: "admin",
             element: <Admin />
+          },
+          {
+            path: "profile",
+            element: <Profile />
           }
         ]
       },

@@ -1,9 +1,10 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Wrapper = styled.aside`
   @media (min-width: 992px) {
     display: none;
   }
+
   .sidebar-container {
     position: fixed;
     inset: 0;
@@ -16,6 +17,7 @@ const Wrapper = styled.aside`
     transition: var(--transition);
     visibility: hidden;
   }
+
   .show-sidebar {
     z-index: 99;
     opacity: 1;
@@ -58,6 +60,7 @@ const Wrapper = styled.aside`
   .nav-link:hover {
     color: var(--primary-500);
   }
+
   .icon {
     font-size: 1.5rem;
     margin-right: 1rem;
