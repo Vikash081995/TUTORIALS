@@ -3,7 +3,7 @@ import { useState, useContext, createContext } from "react";
 import { Outlet } from "react-router-dom";
 import Wrapper from "../assets/wrappers/Dashboard";
 import { BigSidebar, SmallSidebar, Navbar } from "../components";
-import { checkDefaulttheme } from "./../App";
+import { checkDefaulttheme } from "../App";
 
 const DashboardContext = createContext();
 
