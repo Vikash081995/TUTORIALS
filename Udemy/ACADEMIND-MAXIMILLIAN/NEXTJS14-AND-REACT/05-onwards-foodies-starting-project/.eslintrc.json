@@ -1,0 +1,6 @@
+{
+  "extends": ["next", "react-app"],
+  "rules": {
+    "@next/next/no-img-element": "off"
+  }
+}
