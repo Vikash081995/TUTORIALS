@@ -3,6 +3,9 @@ import { BadRequestError, NotFoundError } from "../errors/customErrors.js";
 import { JOB_STATUS, JOB_TYPE } from "../utils/constants.js";
 import mongoose from "mongoose";
 import Job from "../models/JobModel.js";
+import User from '../models/UserModel.js';
+
+
 const withValidationErrors = (validateValues) => {
   return [
     validateValues,
@@ -33,8 +36,32 @@ export const validateJobInput = withValidationErrors([
 export const validateIdParam = withValidationErrors([
   param("id").custom(async (value) => {
     const isValidId = mongoose.Types.ObjectId.isValid(value);
-    if (!isValidId) throw new BadRequestError("invalid MongoDB id");
+    if (!isValidId) throw new Error("invalid MongoDB id");
     const job = await Job.findById(value);
     if (!job) throw new NotFoundError(`no job with id : ${value}`);
   })
+]);
+
+
+
+export const validateRegisterInput = withValidationErrors([
+  body("name").notEmpty().withMessage("name is required"),
+  body("email")
+    .notEmpty()
+    .withMessage("email is required")
+    .isEmail()
+    .withMessage("invalid email format")
+    .custom(async (email) => {
+      const user = await User.findOne({ email });
+      if (user) {
+        throw new BadRequestError("email already exists");
+      }
+    }),
+  body("password")
+    .notEmpty()
+    .withMessage("password is required")
+    .isLength({ min: 8 })
+    .withMessage("password must be at least 8 characters long"),
+  body("location").notEmpty().withMessage("location is required"),
+  body("lastName").notEmpty().withMessage("last name is required")
 ]);

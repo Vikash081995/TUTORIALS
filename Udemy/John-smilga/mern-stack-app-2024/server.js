@@ -5,6 +5,7 @@ import * as dotenv from "dotenv";
 import mongoose from "mongoose";
 const app = express();
 import JobRouter from "./routes/JobRoutes.js";
+import authRouter from "./routes/authRouter.js";
 import errorHandlerMiddleware from "./middleware/errorHandlerMiddleware.js";
 dotenv.config();
 
@@ -24,6 +25,7 @@ app.use("*", (req, res) => {
 });
 
 app.use("/api/v1/jobs", JobRouter);
+app.use("/api/v1/auth", authRouter);
 
 try {
   await mongoose.connect(process.env.MONGO_URL);
