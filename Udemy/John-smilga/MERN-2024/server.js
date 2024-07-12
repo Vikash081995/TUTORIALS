@@ -5,8 +5,10 @@ import * as dotenv from "dotenv";
 import mongoose from "mongoose";
 const app = express();
 import JobRouter from "./routes/JobRoutes.js";
+import cookieParser from "cookie-parser";
 import authRouter from "./routes/authRouter.js";
 import errorHandlerMiddleware from "./middleware/errorHandlerMiddleware.js";
+import { authenticateUser } from "./middleware/authMiddleware.js";
 dotenv.config();
 
 const port = process.env.PORT || 5100;
@@ -24,8 +26,9 @@ app.use("*", (req, res) => {
   res.status(404).json({ msg: "not found" });
 });
 
-app.use("/api/v1/jobs", JobRouter);
+app.use("/api/v1/jobs", authenticateUser, JobRouter);
 app.use("/api/v1/auth", authRouter);
+app.use(cookieParser());
 
 try {
   await mongoose.connect(process.env.MONGO_URL);
