@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useRef } from "react";
 
 export const UncontrolledForm = () => {
-  const nameInputRef = React.createRef();
-  const ageInputRef = React.createRef();
+  const nameInputRef = useRef();
+  const ageInputRef = useRef();
 
   const SubmitForm = (e) => {
     console.log(nameInputRef.current.value);
