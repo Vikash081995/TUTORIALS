@@ -1,7 +1,19 @@
-import { useCurrentUser } from "./current-user.hook";
+import { useDatasource } from "./data-source.hook";
+import { useCallback } from "react";
 
-export const UserInfo = () => {
-  const user = useCurrentUser();
+const fetchFromServer = (resourceUrl) => async () => {
+  const response = await axios.get(resourceUrl);
+  return response.data;
+};
+
+const getFromLocalStorage = (key) => () => {
+  return localStorage.getItem(key);
+};
+
+export const UserInfo = ({ userId }) => {
+  const fetchUser = useCallback(fetchFromServer(`/users/${userId}`), [userId]);
+  const user = useDataSource(fetchUser);
+  const message = useDatasource(getFromLocalStorage("msg"));
   const { name, age, country, books } = user || {};
   return user ? (
     <>
