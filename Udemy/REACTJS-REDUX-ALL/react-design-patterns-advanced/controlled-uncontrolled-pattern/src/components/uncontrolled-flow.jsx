@@ -4,7 +4,15 @@ export const UncontrolledFlow = ({ children, onDone }) => {
   const [data, setData] = useState({});
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
 
-  const goNext = () => {
+  const goNext = (dataFromStep) => {
+    const nextStepIndex = currentStepIndex + 1;
+
+    const newData={
+      ...data,
+      ...dataFromStep
+    }
+    setData(newData);
+
     setCurrentStepIndex(currentStepIndex + 1);
   };
 
