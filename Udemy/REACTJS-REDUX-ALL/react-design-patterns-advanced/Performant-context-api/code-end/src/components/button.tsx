@@ -12,13 +12,9 @@ const ToggleButton = styled.button`
 `;
 
 const Button = () => {
-  const { open, close } = useNavApi();
+  const { toggle } = useNavApi();
   const { collapsed } = useNavData();
-  return (
-    <ToggleButton onClick={collapsed ? open : close}>
-      {collapsed ? "➤" : "⮜"}
-    </ToggleButton>
-  );
+  return <ToggleButton onClick={toggle}>{collapsed ? ">" : "<"}</ToggleButton>;
 };
 
 export const CloseButton = () => {
