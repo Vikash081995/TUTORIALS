@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="file" onchange="uploadFile(this.file)" />
+    <div class="message"></div>
+    <script>
+      let message = document.getElementById("message");
+      function uploadFile(files) {
+        console.log(files[0]);
+        message.innerText = file[0].name;
+      }
+    </script>
+  </body>
+</html>
